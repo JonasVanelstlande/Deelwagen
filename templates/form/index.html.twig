@@ -4,19 +4,17 @@
 
 {% block body %}
 <style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    .form-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
 
-    #totalkm {
+    #kilometer_form_totalKm {
       pointer-events: none;
       border: none;
       outline: none;
-      font-size: 18px;
-      font-family: sans-serif;
+      opacity: 0;
     }
 </style>
 
-<div class="example-wrapper">
+<div class="form-wrapper">
     {% if firstname %}
       <h1>Welkom {{firstname}}</h1>
     {% else %}
@@ -25,34 +23,20 @@
     <h2>Geef je gereden kilometers in</h2>
 {{ form_start(form) }}
     {{ form_row(form.date, {
-            label: 'Datum'
+            label: 'Datum '
     }) }}
     {{ form_row(form.startKm, {
-            label: 'Begin kilometerstand'
+            label: 'Begin kilometerstand '
     }) }}
     {{ form_row(form.endKm, {
-            label: 'Eind kilometerstand'
+            label: 'Eind kilometerstand '
     }) }}
     {{ form_row(form.totalKm, {
-            label: 'Totale gereden kilometers (dit veld wordt automatisch berekend)'
+            label: 'Totale gereden kilometers worden berekend bij inzending'
     }) }}
 
     <input type="submit" name="sendKm" value="Versturen">
 {{ form_end(form) }}
-
-    <script>
-    function calcKm(){
-        const endKmField = document.querySelector("#kilometer_form_endKm");
-        const startKmField = document.querySelector("#kilometer_form_startKm");
-        const totalKmField = document.querySelector("#kilometer_form_totalKm");
-
-        let totalCalcKm = endKmField.value - startKmField.value;
-
-        totalKmField.value = totalCalcKm;
-
-        console.log(totalCalcKm);
-    }
-    </script>
 </div>
 
 
