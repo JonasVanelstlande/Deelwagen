@@ -6,45 +6,45 @@
 <style>
     .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+
+    #totalkm {
+      pointer-events: none;
+      border: none;
+      outline: none;
+      font-size: 18px;
+      font-family: sans-serif;
+    }
 </style>
 
 <div class="example-wrapper">
-    {% if username %}
-      <h1>Welkom {{username}}</h1>
+    {% if firstname %}
+      <h1>Welkom {{firstname}}</h1>
     {% else %}
       <h1>Welkom</h1>
     {% endif %}
     <h2>Geef je gereden kilometers in</h2>
-    <form>
-    <div class="form-group">
-      <label for="">Datum</label>
-      <input type="date"
-        class="form-control" name="date" id="date" placeholder="">
-    </div>
-    <div class="form-group">
-      <label for="startkm">Begin kilometerstand</label>
-      <input type="number" onChange="calcKm()"
-        class="form-control" name="startkm" id="startkm" placeholder="bv. 3500">
-    </div>
-    <div class="form-group">
-      <label for="startkm">Eind kilometerstand</label>
-      <input type="number" onChange="calcKm()"
-        class="form-control" name="endkm" id="endkm" placeholder="bv. 3600">
-    </div>
-    <div class="form-group">
-      <label for="totalkm">Totaal gereden kilometers</label>
-      <input type="number" disabled
-        class="form-control" name="totalkm" id="totalkm">
-    </div>
-    
-    <button type="submit" class="btn btn-primary">Kilometers insturen</button>
-    </form>
+{{ form_start(form) }}
+    {{ form_row(form.date, {
+            label: 'Datum'
+    }) }}
+    {{ form_row(form.startKm, {
+            label: 'Begin kilometerstand'
+    }) }}
+    {{ form_row(form.endKm, {
+            label: 'Eind kilometerstand'
+    }) }}
+    {{ form_row(form.totalKm, {
+            label: 'Totale gereden kilometers (dit veld wordt automatisch berekend)'
+    }) }}
+
+    <input type="submit" name="sendKm" value="Versturen">
+{{ form_end(form) }}
 
     <script>
     function calcKm(){
-        const endKmField = document.querySelector("#endkm");
-        const startKmField = document.querySelector("#startkm");
-        const totalKmField = document.querySelector("#totalkm");
+        const endKmField = document.querySelector("#kilometer_form_endKm");
+        const startKmField = document.querySelector("#kilometer_form_startKm");
+        const totalKmField = document.querySelector("#kilometer_form_totalKm");
 
         let totalCalcKm = endKmField.value - startKmField.value;
 
