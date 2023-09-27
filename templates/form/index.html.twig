@@ -15,11 +15,7 @@
 </style>
 
 <div class="form-wrapper">
-    {% if firstname %}
-      <h1>Welkom {{firstname}}</h1>
-    {% else %}
-      <h1>Welkom</h1>
-    {% endif %}
+    <h1>Welkom {{app.user.firstname}}</h1>
     <h2>Geef je gereden kilometers in</h2>
 {{ form_start(form) }}
     {{ form_row(form.date, {

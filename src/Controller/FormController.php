@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Kilometers;
+use App\Entity\User;
 use App\Form\KilometerFormType;
 use App\Repository\KilometersRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -35,17 +36,19 @@ class FormController extends AbstractController
         $trip = new Kilometers();
         $form = $this->createForm(KilometerFormType::class, $trip);
 
-        dd($this->em);
-
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $newTrip = $form->getData();
             $newTrip->setTotalKm($newTrip->getEndKm() - $newTrip->getStartKm());
+            $newTrip->setUser($this->getUser());
 
+            $this->em->persist($newTrip);
+            $this->em->flush();
+
+            return $this->redirectToRoute('deelwagen');
         }
 
         return $this->render('form/index.html.twig', [
-            'firstname' => 'Jonas',
             'form' => $form->createView()
         ]);
     }

@@ -4,12 +4,10 @@ namespace App\Entity;
 
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -34,12 +32,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 255)]
     private ?string $lastName = null;
-
-    #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
-    private ?Kilometers $trips = null;
-
-    #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
-    private ?Kilometers $kilometers = null;
 
     public function getId(): ?int
     {
@@ -131,40 +123,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setLastName(string $lastName): static
     {
         $this->lastName = $lastName;
-
-        return $this;
-    }
-
-    public function getTrips(): ?Kilometers
-    {
-        return $this->trips;
-    }
-
-    public function setTrips(Kilometers $trips): static
-    {
-        // set the owning side of the relation if necessary
-        if ($trips->getUser() !== $this) {
-            $trips->setUser($this);
-        }
-
-        $this->trips = $trips;
-
-        return $this;
-    }
-
-    public function getKilometers(): ?Kilometers
-    {
-        return $this->kilometers;
-    }
-
-    public function setKilometers(Kilometers $kilometers): static
-    {
-        // set the owning side of the relation if necessary
-        if ($kilometers->getUser() !== $this) {
-            $kilometers->setUser($this);
-        }
-
-        $this->kilometers = $kilometers;
 
         return $this;
     }
