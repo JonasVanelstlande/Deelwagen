@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Export CSV{% endblock %}
+
+{% block body %}
+<style>
+</style>
+
+<div>
+{% if errorMessage is defined %}
+    <p>{{ errorMessage }}</p>
+{% endif %}
+{% if app.user %}
+    <div class="mb-3">
+        You are logged in as {{ app.user.firstName }} {{ app.user.lastName }}, <a href="{{ path('app_logout') }}">Logout</a>
+    </div>
+{% endif %}
+{{ form_start(exportform) }}
+    {{ form_row(exportform.startDate, {
+            label: 'Begin datum'
+    }) }}
+    {{ form_row(exportform.endDate, {
+            label: 'Eind datum '
+    }) }}
+
+    <input type="submit" name="sendDates" value="Downloaden">
+{{ form_end(exportform) }}
+</div>
+{% endblock %}
