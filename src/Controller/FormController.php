@@ -19,14 +19,7 @@ class FormController extends AbstractController
         $this->em = $em;
     }
 
-    #[Route('/deelwagen', name: 'deelwagen')]
-    public function index(): Response
-    {
-        return $this->render('base.html.twig', [
-        ]);
-    }
-
-    #[Route('/deelwagen/form', name: 'form')]
+    #[Route('/deelwagen', name: 'form')]
     public function create(Request $request): Response
     {
         $trip = new Kilometers();
@@ -41,7 +34,7 @@ class FormController extends AbstractController
             $this->em->persist($newTrip);
             $this->em->flush();
 
-            return $this->redirectToRoute('deelwagen');
+            return $this->redirectToRoute('form');
         }
 
         return $this->render('form/index.html.twig', [

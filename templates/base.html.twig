@@ -5,6 +5,62 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
         {% block stylesheets %}
+        <style>
+            body {
+                font-family: sans-serif;
+                background-color: #6290C3;
+                color: #1F2232;
+            }
+
+            .wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+            .wrapper code { background: #F5F5F5; padding: 2px 6px; }
+
+            .c-link {
+                padding: 5px 10px;
+                border: 2px solid #1F2232;
+                background-color: #6F8695;
+                color: white;
+                border-radius: 10px;
+                transition: background-color .3s ease-in-out;
+                text-decoration: none;
+                font-size: 14px;
+                cursor: pointer;
+            }
+
+            .c-link--spacing {
+                margin-top: 50px;
+            }
+
+            .c-link:hover {
+                background-color: #1F2232;
+            }
+
+            .formfield {
+                display:block;
+                background: transparent;
+                border: 2px solid #1F2232;
+                border-radius: 10px;
+                padding: 5px 10px;
+                margin-bottom: 20px;
+            }
+
+            .submit-button {
+                margin-top: 20px;
+            }
+
+            input[type="checkbox"] {
+                margin-left: 10px;
+            }
+
+            select {
+                background: transparent;
+                border: 2px solid #1F2232;
+                border-radius: 10px;
+                padding: 5px 10px;
+                margin-right: 10px;
+                margin-bottom: 20px;
+            }
+        </style>
         {% endblock %}
 
         {% block javascripts %}

@@ -17,7 +17,8 @@
 <div class="form-wrapper">
 {% if app.user %}
     <div class="mb-3">
-        You are logged in as {{ app.user.firstName }} {{ app.user.lastName }}, <a href="{{ path('app_logout') }}">Logout</a>
+        Je bent ingelogd als {{ app.user.firstName }} {{ app.user.lastName }} 
+        <a href="{{ path('app_logout') }}" class="c-link">Logout</a>
     </div>
 {% endif %}
     <h1>Welkom {{app.user.firstname}}</h1>
@@ -36,9 +37,11 @@
             label: 'Totale gereden kilometers worden berekend bij inzending'
     }) }}
 
-    <input type="submit" name="sendKm" value="Versturen">
+    <input type="submit" name="sendKm" value="Versturen" class="c-link">
 {{ form_end(form) }}
+<div class="c-link--spacing">
+<a href="{{ path('export') }}" class="c-link">Ritten exporteren</a>
 </div>
-
+</div>
 
 {% endblock %}

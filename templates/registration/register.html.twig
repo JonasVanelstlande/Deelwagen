@@ -3,7 +3,8 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
-    <h1>Register</h1>
+<div class="wrapper">
+    <h1>Registreren</h1>
 
     {{ form_errors(registrationForm) }}
 
@@ -20,9 +21,14 @@
         }) }}
         {{ form_row(registrationForm.agreeTerms) }}
 
-        <button type="submit" class="btn">Register</button>
+        <div class='submit-button'>
+        <button type="submit" class="c-link">Registreren</button>
+        </div>
     {{ form_end(registrationForm) }}
 
-        <p>Indien je al een account hebt log dan <a href="{{ path('login') }}">hier</a> in</p>
-
+    <div class="c-link--spacing">
+        <p>Indien je al een account hebt:</p>
+        <a href="{{ path('app_login') }}" class="c-link">Inloggen</a>
+    </div>
+</div>
 {% endblock %}
