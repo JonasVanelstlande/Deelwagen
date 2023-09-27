@@ -3,6 +3,7 @@
 {% block title %}Log in or register{% endblock %}
 
 {% block body %}
+<div class="wrapper">
 <form method="post">
     {% if error %}
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -10,21 +11,22 @@
 
     {% if app.user %}
         <div class="mb-3">
-            Je bent ingelogd als {{ app.user.firstName }} {{ app.user.lastName }}<a href="{{ path('app_logout') }}" class="c-link">Uitloggen</a>
+            Je bent ingelogd als {{ app.user.firstName }} {{ app.user.lastName }}
+            <a href="{{ path('app_logout') }}" class="c-link">Uitloggen</a>
         </div>
     {% endif %}
 
     <h1 class="h3 mb-3 font-weight-normal">Gelieve in te loggen</h1>
     <label for="inputEmail">Email</label>
-    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control formfield" autocomplete="email" required autofocus>
     <label for="inputPassword">Password</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+    <input type="password" name="password" id="inputPassword" class="form-control formfield" autocomplete="current-password" required>
 
     <input type="hidden" name="_csrf_token"
            value="{{ csrf_token('authenticate') }}"
     >
 
-    <button class="btn btn-lg btn-primary" type="submit">
+    <button class="btn btn-lg btn-primary c-link" type="submit">
         Login
     </button>
 
@@ -32,4 +34,5 @@
     <p>Indien je nog geen account hebt:</p>
     <a href="{{ path('register') }}" class="c-link">Registreren</a>
 </form>
+</div>
 {% endblock %}
