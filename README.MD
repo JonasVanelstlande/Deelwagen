@@ -9,6 +9,8 @@ To setup this project locally
 2. install dependencies
  - composer install
 3. initialize database
+ - use the .env.preview to create a .env file, 
+    but change the db_user and db_password to your local mysql server user and password
  - symfony console doctrine:database:create
 4. migrate the tables for the database
  - symfony console doctrine:migrations:migrate
