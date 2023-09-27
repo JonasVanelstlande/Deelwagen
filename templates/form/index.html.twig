@@ -15,6 +15,11 @@
 </style>
 
 <div class="form-wrapper">
+{% if app.user %}
+    <div class="mb-3">
+        You are logged in as {{ app.user.firstName }} {{ app.user.lastName }}, <a href="{{ path('app_logout') }}">Logout</a>
+    </div>
+{% endif %}
     <h1>Welkom {{app.user.firstname}}</h1>
     <h2>Geef je gereden kilometers in</h2>
 {{ form_start(form) }}

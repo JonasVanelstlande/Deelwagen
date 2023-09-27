@@ -3,9 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Kilometers;
-use App\Entity\User;
 use App\Form\KilometerFormType;
-use App\Repository\KilometersRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,12 +12,10 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class FormController extends AbstractController
 {
-    private $kilometersRepository;
     private $em;
 
-    public function __construct(KilometersRepository $kilometersRepository, EntityManagerInterface $em)
+    public function __construct(EntityManagerInterface $em)
     {
-        $this->kilometersRepository = $kilometersRepository;
         $this->em = $em;
     }
 

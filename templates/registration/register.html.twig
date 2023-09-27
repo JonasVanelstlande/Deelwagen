@@ -10,7 +10,7 @@
     {{ form_start(registrationForm) }}
         {{ form_row(registrationForm.email) }}
         {{ form_row(registrationForm.firstName, {
-            label: 'Voornaam'
+            label: 'Voornaam '
         })}}
         {{ form_row(registrationForm.lastName, {
             label: 'Naam'
@@ -22,4 +22,7 @@
 
         <button type="submit" class="btn">Register</button>
     {{ form_end(registrationForm) }}
+
+        <p>Indien je al een account hebt log dan <a href="{{ path('login') }}">hier</a> in</p>
+
 {% endblock %}

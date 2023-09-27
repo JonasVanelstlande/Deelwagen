@@ -21,28 +21,20 @@ class KilometersRepository extends ServiceEntityRepository
         parent::__construct($registry, Kilometers::class);
     }
 
-//    /**
-//     * @return Kilometers[] Returns an array of Kilometers objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('k')
-//            ->andWhere('k.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('k.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+   
+   public function findAllInDateRange($startDate, $endDate): array
+   {
+        $conn = $this->getEntityManager()->getConnection();
 
-//    public function findOneBySomeField($value): ?Kilometers
-//    {
-//        return $this->createQueryBuilder('k')
-//            ->andWhere('k.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+        $sql = '
+            SELECT * FROM kilometers trip
+            WHERE trip.date BETWEEN startDate AND endDate
+            ORDER BY trip.date ASC
+            ';
+
+        $resultSet = $conn->executeQuery($sql, ['startDate' => $startDate, 'endDate' => $endDate]);
+
+        // returns an array of arrays (i.e. a raw data set)
+        return $resultSet->fetchAllAssociative();
+   }
 }
