@@ -3,10 +3,8 @@
 {% block title %}Export CSV{% endblock %}
 
 {% block body %}
-<style>
-</style>
 
-<div>
+<div class="wrapper">
 {% if errorMessage is defined %}
     <p>{{ errorMessage }}</p>
 {% endif %}
@@ -23,7 +21,7 @@
             label: 'Eind datum '
     }) }}
 
-    <input type="submit" name="sendDates" value="Downloaden">
+    <input type="submit" name="sendDates" value="Downloaden" class="c-link">
 {{ form_end(exportform) }}
 </div>
 {% endblock %}

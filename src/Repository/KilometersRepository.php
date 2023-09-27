@@ -28,7 +28,7 @@ class KilometersRepository extends ServiceEntityRepository
 
         $sql = '
             SELECT * FROM kilometers trip
-            WHERE trip.date BETWEEN startDate AND endDate
+            WHERE trip.date BETWEEN :startDate AND :endDate
             ORDER BY trip.date ASC
             ';
 

@@ -3,13 +3,21 @@
 {% block title %}Hello HomeController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    Welkom bij de deelwagen app, om de app te kunnen gebruiken moet je ingelogd zijn.
-    <a href="{{ path('login') }}"
+<div class="wrapper">
+    {% if app.user %}
+        <h1>Welkom bij de deelwagen app, {{ app.user.firstName }}</h1>
+        <div>
+            <a href="{{ path('form') }}" class="c-link">Kilometers ingeven</a>
+            <a href="{{ path('export') }}" class="c-link">Ritten exporteren</a>
+        </div>
+        <div>
+            <a href="{{ path('app_login') }}" class="c-link">Uitloggen</a>
+        </div>
+    {% else %}
+        <H1> Welkom bij de deelwagen app, om de app te kunnen gebruiken moet je een account hebben en ingelogd zijn.</h1>
+        <a href="{{ path('app_login') }}" class="c-link">Inloggen</a>
+        <a href="{{ path('register') }}" class="c-link">Registreren</a>
+    {% endif %}
 </div>
 {% endblock %}

@@ -2,22 +2,24 @@
 
 namespace App\Controller;
 
-use App\Entity\Kilometers;
 use App\Form\ExportFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\KilometersRepository;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\UserRepository;
+use DateTime;
 
 class ExportController extends AbstractController
 {
     private $kilometersRepository;
+    private $userRepository;
 
-    public function __construct(KilometersRepository $kilometersRepository)
+    public function __construct(KilometersRepository $kilometersRepository, UserRepository $userRepository)
     {
         $this->kilometersRepository = $kilometersRepository;
+        $this->userRepository = $userRepository;
     }
 
     #[Route('/export', name: 'export')]
@@ -36,8 +38,7 @@ class ExportController extends AbstractController
                 ]);
             }
 
-            $trips = $this->kilometersRepository->findAllInDateRange($dates['startDate'], $dates['endDate']);
-
+            $trips = $this->kilometersRepository->findAllInDateRange($dates['startDate']->format("Y-m-d"), $dates['endDate']->format("Y-m-d"));
 
             //create the data array
             $rows = [];
@@ -47,13 +48,16 @@ class ExportController extends AbstractController
             $rows[] = implode(",", $titles);
 
             foreach ($trips as $trip) {
-                $user = $trip->getUser()->getFirstName() . " " . $trip->getUser()->getLastName();
-                $date = $trip->getDate()->format('d-m-Y');
-                $totalKm = $trip->getTotalKm() . " km";
-                $startKm = $trip->getStartKm() . " km";
-                $endKm = $trip->getEndKm() . " km";
+                $user = $this->userRepository->find($trip['user_id']);
 
-                $data = [$date, $user, $totalKm, $startKm, $endKm];
+                $userName = $user->getFirstName() . " " . $user->getLastName();
+
+                $date = (new DateTime($trip['date']))->format('d-m-Y');
+                $totalKm = $trip['total_km'] . " km";
+                $startKm = $trip['start_km'] . " km";
+                $endKm = $trip['end_km'] . " km";
+
+                $data = [$date, $userName, $totalKm, $startKm, $endKm];
 
                 $rows[] = implode(",", $data);
             }

@@ -10,7 +10,7 @@
 
     {% if app.user %}
         <div class="mb-3">
-            Je bent ingelogd als {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+            Je bent ingelogd als {{ app.user.firstName }} {{ app.user.lastName }}<a href="{{ path('app_logout') }}" class="c-link">Uitloggen</a>
         </div>
     {% endif %}
 
@@ -29,6 +29,7 @@
     </button>
 
 
-    <p>Indien je nog geen account hebt registreer je <a href="{{ path('register') }}">hier</a></p>
+    <p>Indien je nog geen account hebt:</p>
+    <a href="{{ path('register') }}" class="c-link">Registreren</a>
 </form>
 {% endblock %}
